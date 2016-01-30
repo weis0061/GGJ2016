@@ -11,7 +11,7 @@ public class Alphaghetti : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		if(transform.position.y<10){
+		if(transform.position.y<3){
 			Buoy ();
 		}
 	}
