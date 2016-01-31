@@ -19,12 +19,12 @@ public class WordHandler : MonoBehaviour {
 	public void HandleWord(string w){
 		switch(w){
 		default:PlayOnWord.play ();break;
-		case "noodles":wd.AddPastas(20);break;
+		case "noodles":wd.AddPastas(20);break;/*
 		case "duck":GameObject.Instantiate(DuckPrefab,SpawnMarker.position,SpawnMarker.rotation);break;
 		case "demon":PlayOnDemon.play();GameObject.Instantiate(DemonPrefab,SpawnMarker.position,SpawnMarker.rotation);break;
 		case "satan":PlayOnDemon.play();GameObject.Instantiate(DemonPrefab,SpawnMarker.position,SpawnMarker.rotation);break;
 		case "voodoo":GameObject.Instantiate(VoodooPrefab,SpawnMarker.position,SpawnMarker.rotation);break;
-		case "tomato":GameObject.Instantiate(TomatoPrefab,SpawnMarker.position,SpawnMarker.rotation);break;
+		case "tomato":GameObject.Instantiate(TomatoPrefab,SpawnMarker.position,SpawnMarker.rotation);break;*/
 		}
 	}
 }
