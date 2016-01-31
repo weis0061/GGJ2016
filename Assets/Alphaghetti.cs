@@ -8,7 +8,8 @@ public class Alphaghetti : MonoBehaviour
     public float Torque= 100; 
     Rigidbody rb;
     public char MyChar;
-    bool IsRemoved;
+    [HideInInspector]
+    public bool IsRemoved;
     // Use this for initialization
     void Start()
     {
@@ -34,15 +35,15 @@ public class Alphaghetti : MonoBehaviour
 
     void Buoy()
     {
-        rb.AddForce(new Vector3(0, Buoyancy * Time.deltaTime, 0));
+            rb.AddForce(new Vector3(0, Buoyancy * Time.deltaTime, 0));
         if (Vector3.Dot(transform.rotation.eulerAngles, Vector3.up) >= 0)
         { }
-            Vector3 TargetAngle=transform.rotation.eulerAngles;
-            TargetAngle.x=0;
-            TargetAngle = Vector3.zero;
-            Vector3 VecDiff = TargetAngle - transform.rotation.eulerAngles;
-            transform.Rotate(VecDiff * Time.deltaTime);
-            VecDiff=transform.TransformDirection(VecDiff);
+            Vector3 TargetAngle=transform.forward;
+            TargetAngle.x=90;
+            
+            Quaternion requiredRotation = Quaternion.FromToRotation(transform.forward, TargetAngle);
+            //rb.AddTorque(requiredRotation.eulerAngles *Time.deltaTime);
+            Debug.DrawRay(transform.position, transform.forward);
     }
 
     public void RemoveFromBowl()

@@ -25,7 +25,7 @@ public class WordDetector : MonoBehaviour {
         cam = GetComponent<Camera>();
         WStart = 0; 
         WEnd = 0;
-        AddPastas(20);
+        AddPastas(2);
 	}
 	
 	// Update is called once per frame
@@ -44,7 +44,7 @@ public class WordDetector : MonoBehaviour {
     {
         for (int i = 0; i < count; i++)
         {
-            GameObject go = GameObject.Instantiate(AlphaghettiDatabase[0]);
+            GameObject go = GameObject.Instantiate(AlphaghettiDatabase[Random.Range((int)0,(int)AlphaghettiDatabase.Length-1)]);
             go.transform.position = PutPastaPosition.position + Random.onUnitSphere * PutPastaRadius;
             CurrentPastaList.Add(go);
         }
@@ -54,35 +54,39 @@ public class WordDetector : MonoBehaviour {
     {
         if (!Chain.Contains(go))
         {
-            Chain.Add(go);
-            int stringpos = s.Length;
+            if (!go.GetComponent<Alphaghetti>().IsRemoved)
+            {
+                Chain.Add(go);
+                int stringpos = s.Length;
 
-            s = s + go.GetComponent<Alphaghetti>().MyChar;
-            int mask = 1 << (int)LayerMask.NameToLayer("noodles");
-            RaycastHit[] rhits = Physics.RaycastAll(go.transform.position, cam.transform.right, DistancePerPasta,mask);
-            for (int i = 0; i < rhits.Length; i++)
-            {
-                Vector2 objPos= cam.WorldToScreenPoint(go.transform.position);
-                Vector2 newpos = cam.WorldToScreenPoint(rhits[i].transform.position);
-                float trigRatio = (newpos.x - objPos.x) / (newpos.y / objPos.y);
-                //if (Mathf.Tan(45) > trigRatio||Mathf.Tan(-45)<trigRatio)
+                s = s + go.GetComponent<Alphaghetti>().MyChar;
+                int mask = 1 << (int)LayerMask.NameToLayer("noodles");
+                RaycastHit[] rhits = Physics.RaycastAll(go.transform.position, cam.transform.right, DistancePerPasta, mask);
+                Debug.DrawLine(go.transform.position, cam.transform.right + go.transform.position);
+                for (int i = 0; i < rhits.Length; i++)
                 {
-                    rcurf(rhits[i].collider.gameObject, s, Chain);
+                    Vector2 objPos = cam.WorldToScreenPoint(go.transform.position);
+                    Vector2 newpos = cam.WorldToScreenPoint(rhits[i].transform.position);
+                    //float trigRatio = (newpos.x - objPos.x) / (newpos.y / objPos.y);
+                    //if (Mathf.Tan(45) > trigRatio||Mathf.Tan(-45)<trigRatio)
+                    {
+                        rcurf(rhits[i].collider.gameObject, s, Chain);
+                    }
                 }
-            }
-            if (rhits.Length == 0)
-            {
-                CheckDictionary(s, out WStart, out WEnd);
-            }
-            if (WEnd != 0)
-            {
-                if (stringpos >= WStart && stringpos <= WEnd)
+                if (rhits.Length == 0)
                 {
-                    go.GetComponent<Alphaghetti>().RemoveFromBowl();
-                    CurrentPastaList.Remove(go);
-                    AddPastas(1);
+                    CheckDictionary(s, out WStart, out WEnd);
                 }
-                return;
+                if (WEnd != 0)
+                {
+                    if (stringpos >= WStart && stringpos <= WEnd)
+                    {
+                        go.GetComponent<Alphaghetti>().RemoveFromBowl();
+                        CurrentPastaList.Remove(go);
+                        AddPastas(1);
+                    }
+                    return;
+                }
             }
         }
     }
