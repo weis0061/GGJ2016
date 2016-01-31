@@ -3,13 +3,11 @@ using System.Collections;
 
 public class Mover : MonoBehaviour
 {
-
-
     // Use this for initialization
     void Start()
     {
         cam = GetComponent<Camera>();
-        mask = LayerMask.NameToLayer("grabbables") | LayerMask.NameToLayer("noodles");
+        mask = 1<<LayerMask.NameToLayer("grabbables") | 1<<LayerMask.NameToLayer("noodles");
         p = new Plane(new Vector3(0, 1, 0), new Vector3(0, 10, 0));
     }
 
@@ -20,24 +18,21 @@ public class Mover : MonoBehaviour
     public float PullForce;
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         //select the pasta
         if (Input.GetButtonDown("Select"))
         {
             Ray r = cam.ScreenPointToRay(Input.mousePosition);
-			Debug.Log("raycasting");
             RaycastHit rhit;
-            if (Physics.Raycast(r, out rhit, mask))
+            if (Physics.Raycast(r, out rhit,mask))
             {
                 SelectedRb = rhit.rigidbody;
-				Debug.Log(SelectedRb);
             }
 		}
 		if (Input.GetButtonUp("Select"))
 		{
 			SelectedRb = null;
-			Debug.Log("RB deselected");
 		}
 
         //if pasta is selected, move it
@@ -55,4 +50,5 @@ public class Mover : MonoBehaviour
             }
         }
     }
+
 }

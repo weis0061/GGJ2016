@@ -46,10 +46,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\AddThings.cs" />
      <Compile Include="Assets\Alphaghetti.cs" />
      <Compile Include="Assets\CandleFlicker.cs" />
      <Compile Include="Assets\Mover.cs" />
+     <Compile Include="Assets\SoundPlayer.cs" />
      <Compile Include="Assets\WordDetector.cs" />
+     <Compile Include="Assets\WordHandler.cs" />
+     <Compile Include="Assets\buoyant.cs" />
+     <Compile Include="Assets\swimmer.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

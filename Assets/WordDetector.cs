@@ -17,6 +17,7 @@ public class WordDetector : MonoBehaviour {
         public GameObject Object;
         public int weight;
     }
+	public WordHandler WHandler;
     public AlphaghettiWeight[] AlphaghettiDatabase;
     public float AnglePerPasta;
     public float DistancePerPasta;
@@ -24,6 +25,8 @@ public class WordDetector : MonoBehaviour {
     public float PutPastaRadius;
     int WStart, WEnd;
     public int InitialSpawnLetters;
+	public float SpaghettiSpawnRate=5f;
+	float SpaghettiTimer=5f;
     Camera cam;
     int TotalWeight;
 	// Use this for initialization
@@ -31,29 +34,48 @@ public class WordDetector : MonoBehaviour {
     {
         CurrentPastaList = new List<GameObject>();
         cam = GetComponent<Camera>();
+
+		
+		if(!WHandler)WHandler=GetComponent<WordHandler>();
         WStart = 0; 
         WEnd = 0;
         AddPastas(InitialSpawnLetters);
+		TotalWeight=0;
+		for(int i=0;i<AlphaghettiDatabase.Length;++i){
+			TotalWeight+=AlphaghettiDatabase[i].weight;
+		}
 	}
+	public static int WordsMade=0;
+	public static int LettersUsed=0;
+	public float TimeLeft=300;
 	
 	// Update is called once per frame
 	void Update ()
     {
-        WStart = 0;
-        WEnd = 0;
+		SpaghettiTimer-=Time.deltaTime;
+		if(SpaghettiTimer<=0){
+			SpaghettiTimer=SpaghettiSpawnRate;
+			AddPastas(1);
+		}
         for (int i = 0; i < CurrentPastaList.Count; i++)
-        {
-            rcurf(CurrentPastaList[i], "", new List<GameObject>());
+		{
+			WStart = 0;
+			WEnd = 0;
+			rcurf(CurrentPastaList[i], "", new List<GameObject>());
         }
+		TimeLeft-=Time.deltaTime;
+		if(TimeLeft<=0){
+
+		}
+
     }
 
-    void AddPastas(int count)
+    public void AddPastas(int count)
     {
         for (int i = 0; i < count; i++)
         {
             int TempWeight = TotalWeight;
             int rand = Random.Range((int)0, (int)TotalWeight);
-			Debug.Log(AlphaghettiDatabase.Length);
             for (int j = 0; j < AlphaghettiDatabase.Length; j++)
             {
                 TempWeight-=AlphaghettiDatabase[j].weight;
@@ -83,10 +105,6 @@ public class WordDetector : MonoBehaviour {
                 Debug.DrawLine(go.transform.position, cam.transform.right + go.transform.position);
                 for (int i = 0; i < rhits.Length; i++)
                 {
-                    Vector2 objPos = cam.WorldToScreenPoint(go.transform.position);
-                    Vector2 newpos = cam.WorldToScreenPoint(rhits[i].transform.position);
-                    //float trigRatio = (newpos.x - objPos.x) / (newpos.y / objPos.y);
-                    //if (Mathf.Tan(45) > trigRatio||Mathf.Tan(-45)<trigRatio)
                     {
                         rcurf(rhits[i].collider.gameObject, s, Chain);
                     }
@@ -101,7 +119,7 @@ public class WordDetector : MonoBehaviour {
                     {
                         go.GetComponent<Alphaghetti>().RemoveFromBowl();
                         CurrentPastaList.Remove(go);
-                        AddPastas(1);
+						LettersUsed++;
                     }
                     return;
                 }
@@ -118,8 +136,9 @@ public class WordDetector : MonoBehaviour {
             if (s.Contains(wordlist[i].value))
             {
                 WordStart = s.IndexOf(wordlist[i].value);
-                WordEnd = WordStart + s.Length-1;
-                Debug.Log("Word: " + wordlist[i].value);
+				WordEnd = WordStart + wordlist[i].value.Length-1;
+				WHandler.HandleWord(wordlist[i].value);
+				WordsMade++;
                 return;
             }
         }
