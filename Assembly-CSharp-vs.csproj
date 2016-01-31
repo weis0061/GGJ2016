@@ -50,7 +50,9 @@
      <Compile Include="Assets\Alphaghetti.cs" />
      <Compile Include="Assets\CandleFlicker.cs" />
      <Compile Include="Assets\Mover.cs" />
+     <Compile Include="Assets\ScoreDisplay.cs" />
      <Compile Include="Assets\SoundPlayer.cs" />
+     <Compile Include="Assets\SpriteShaker.cs" />
      <Compile Include="Assets\WordDetector.cs" />
      <Compile Include="Assets\WordHandler.cs" />
      <Compile Include="Assets\buoyant.cs" />

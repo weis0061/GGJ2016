@@ -51,7 +51,7 @@ public class WordDetector : MonoBehaviour
     }
     public static int WordsMade = 0;
     public static int LettersUsed = 0;
-    public float TimeLeft = 300;
+    public static float TimeLeft = 300;
 
     // Update is called once per frame
     void Update()
