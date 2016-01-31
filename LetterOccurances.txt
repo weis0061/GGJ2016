@@ -1,0 +1,28 @@
+Demon, ritual, summon, evil, nihilistic, demonic, conjure, occult, cult, 
+omen, exorcism, curse, Satan, hex, medium, Ouija, séance, voodoo, pentagram, wicca
+A = 8
+B = 0
+C = 11
+D = 4
+E = 11
+F = 0
+G = 1
+H = 2
+I = 11
+J = 2
+K = 0
+L = 5
+M = 9
+N = 9
+O = 12
+P = 1
+Q = 0
+R = 5
+S = 6
+T = 6
+U = 8
+V = 2
+W = 1
+X = 2
+Y = 0
+Z = 0
