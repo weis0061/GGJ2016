@@ -5,6 +5,7 @@ using System.Collections;
 public class swimmer : MonoBehaviour {
 	Rigidbody rb;
 	public float speed;
+	public float Turnspeed;
 	// Use this for initialization
 	void Start () {
 		rb=GetComponent<Rigidbody>();
@@ -12,6 +13,7 @@ public class swimmer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void FixedUpdate () {
-		rb.AddForce(-transform.right+transform.forward*speed*Time.deltaTime);
+		rb.AddTorque (Vector3.up * Random.Range(-1f,1f)* Turnspeed * Time.deltaTime);
+		rb.AddForce(transform.forward*speed*Time.deltaTime);
 	}
 }

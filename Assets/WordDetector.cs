@@ -38,12 +38,14 @@ public class WordDetector : MonoBehaviour {
 		
 		if(!WHandler)WHandler=GetComponent<WordHandler>();
         WStart = 0; 
-        WEnd = 0;
-        AddPastas(InitialSpawnLetters);
+		WEnd = 0;
 		TotalWeight=0;
-		for(int i=0;i<AlphaghettiDatabase.Length;++i){
+		for(int i=0;i<AlphaghettiDatabase.Length;i++){
 			TotalWeight+=AlphaghettiDatabase[i].weight;
 		}
+
+
+        AddPastas(InitialSpawnLetters);
 	}
 	public static int WordsMade=0;
 	public static int LettersUsed=0;
@@ -99,7 +101,7 @@ public class WordDetector : MonoBehaviour {
                 Chain.Add(go);
                 int stringpos = s.Length;
 
-                s = s + go.GetComponent<Alphaghetti>().MyChar;
+                s = s + go.GetComponentInParent<Alphaghetti>().MyChar;
                 int mask = 1 << (int)LayerMask.NameToLayer("noodles");
                 RaycastHit[] rhits = Physics.RaycastAll(go.transform.position, cam.transform.right, DistancePerPasta, mask);
                 Debug.DrawLine(go.transform.position, cam.transform.right + go.transform.position);
