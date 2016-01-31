@@ -27,6 +27,7 @@ public class WordDetector : MonoBehaviour
     int WStart, WEnd;
     public int InitialSpawnLetters;
     public float SpaghettiSpawnRate = 5f;
+	public DisplayEndScore dispend;
     float SpaghettiTimer = 5f;
     Camera cam;
     int TotalWeight;
@@ -51,7 +52,7 @@ public class WordDetector : MonoBehaviour
     }
     public static int WordsMade = 0;
     public static int LettersUsed = 0;
-    public static float TimeLeft = 300;
+	public static float TimeLeft = 300;
 
     // Update is called once per frame
     void Update()
@@ -71,7 +72,7 @@ public class WordDetector : MonoBehaviour
         TimeLeft -= Time.deltaTime;
         if (TimeLeft <= 0)
         {
-
+			dispend.Displayit();
         }
 
     }

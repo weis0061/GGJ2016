@@ -49,6 +49,7 @@
      <Compile Include="Assets\AddThings.cs" />
      <Compile Include="Assets\Alphaghetti.cs" />
      <Compile Include="Assets\CandleFlicker.cs" />
+     <Compile Include="Assets\DisplayEndScore.cs" />
      <Compile Include="Assets\Mover.cs" />
      <Compile Include="Assets\ScoreDisplay.cs" />
      <Compile Include="Assets\SoundPlayer.cs" />
