@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Alphaghetti.cs" />
      <Compile Include="Assets\Mover.cs" />
+     <Compile Include="Assets\WordDetector.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

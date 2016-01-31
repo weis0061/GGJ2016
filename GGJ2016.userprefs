@@ -1,13 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Alphaghetti.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\WordDetector.cs">
     <Files>
+      <File FileName="Assets\WordDetector.cs" Line="48" Column="6" />
       <File FileName="Assets\Mover.cs" Line="1" Column="1" />
-      <File FileName="Assets\Alphaghetti.cs" Line="23" Column="1" />
+      <File FileName="Assets\Alphaghetti.cs" Line="11" Column="20" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="C:\Users\weis0061\Desktop\GGJ2016\Assets\WordDetector.cs" line="49" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
