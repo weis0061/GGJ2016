@@ -1,0 +1,27 @@
+wicca lamb sacrifice dark blood ghost boo hell spirit poltergeist commune death tomato six bad
+A = 7
+B = 4
+C = 5
+D = 4
+E = 6
+F = 1
+G = 2
+H = 3
+I = 7
+J = 0
+K = 1
+L = 5
+M = 4
+N = 1
+O = 9
+P = 2
+Q = 0
+R = 4
+S = 5
+T = 7
+U = 1
+V = 0
+W = 1
+X = 1
+Y = 0
+Z = 0
