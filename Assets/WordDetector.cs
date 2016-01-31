@@ -10,14 +10,22 @@ public class WordDetector : MonoBehaviour {
         public string value;
         public delegate void code();
     }
-    public Word[] wordlist;  
-    public GameObject[] AlphaghettiDatabase;
+    public Word[] wordlist;
+    [System.Serializable]
+    public struct AlphaghettiWeight
+    {
+        public GameObject Object;
+        public int weight;
+    }
+    public AlphaghettiWeight[] AlphaghettiDatabase;
     public float AnglePerPasta;
     public float DistancePerPasta;
     public Transform PutPastaPosition;
     public float PutPastaRadius;
     int WStart, WEnd;
+    public int InitialSpawnLetters;
     Camera cam;
+    int TotalWeight;
 	// Use this for initialization
 	void Start ()
     {
@@ -25,7 +33,7 @@ public class WordDetector : MonoBehaviour {
         cam = GetComponent<Camera>();
         WStart = 0; 
         WEnd = 0;
-        AddPastas(2);
+        AddPastas(InitialSpawnLetters);
 	}
 	
 	// Update is called once per frame
@@ -44,9 +52,19 @@ public class WordDetector : MonoBehaviour {
     {
         for (int i = 0; i < count; i++)
         {
-            GameObject go = GameObject.Instantiate(AlphaghettiDatabase[Random.Range((int)0,(int)AlphaghettiDatabase.Length-1)]);
-            go.transform.position = PutPastaPosition.position + Random.onUnitSphere * PutPastaRadius;
-            CurrentPastaList.Add(go);
+            int TempWeight = TotalWeight;
+            int rand = Random.Range((int)0, (int)TotalWeight);
+            for (int j = 0; j < AlphaghettiDatabase.Length; j++)
+            {
+                TempWeight-=AlphaghettiDatabase[i].weight;
+                if (TempWeight < rand)
+                {
+                    GameObject go = GameObject.Instantiate(AlphaghettiDatabase[j].Object);
+                    go.transform.position = PutPastaPosition.position + Random.onUnitSphere * PutPastaRadius;
+                    CurrentPastaList.Add(go);
+                    j = AlphaghettiDatabase.Length;
+                }
+            }
         }
     }
 
@@ -100,7 +118,7 @@ public class WordDetector : MonoBehaviour {
             if (s.Contains(wordlist[i].value))
             {
                 WordStart = s.IndexOf(wordlist[i].value);
-                WordEnd = WordStart + s.Length;
+                WordEnd = WordStart + s.Length-1;
                 Debug.Log("Word: " + wordlist[i].value);
                 return;
             }
