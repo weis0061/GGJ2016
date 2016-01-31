@@ -39,7 +39,6 @@ public class WordDetector : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log("New Frame");
         WStart = 0;
         WEnd = 0;
         for (int i = 0; i < CurrentPastaList.Count; i++)
@@ -54,9 +53,10 @@ public class WordDetector : MonoBehaviour {
         {
             int TempWeight = TotalWeight;
             int rand = Random.Range((int)0, (int)TotalWeight);
+			Debug.Log(AlphaghettiDatabase.Length);
             for (int j = 0; j < AlphaghettiDatabase.Length; j++)
             {
-                TempWeight-=AlphaghettiDatabase[i].weight;
+                TempWeight-=AlphaghettiDatabase[j].weight;
                 if (TempWeight < rand)
                 {
                     GameObject go = GameObject.Instantiate(AlphaghettiDatabase[j].Object);

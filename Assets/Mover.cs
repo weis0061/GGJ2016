@@ -25,19 +25,24 @@ public class Mover : MonoBehaviour
         //select the pasta
         if (Input.GetButtonDown("Select"))
         {
-            Debug.Log("s");
             Ray r = cam.ScreenPointToRay(Input.mousePosition);
+			Debug.Log("raycasting");
             RaycastHit rhit;
             if (Physics.Raycast(r, out rhit, mask))
             {
                 SelectedRb = rhit.rigidbody;
+				Debug.Log(SelectedRb);
             }
-        }
+		}
+		if (Input.GetButtonUp("Select"))
+		{
+			SelectedRb = null;
+			Debug.Log("RB deselected");
+		}
 
         //if pasta is selected, move it
         if (Input.GetButton("Select") && SelectedRb != null)
         {
-            if (SelectedRb)
             {
                 float distance = 0;
                 Ray r = cam.ScreenPointToRay(Input.mousePosition);
@@ -48,10 +53,6 @@ public class Mover : MonoBehaviour
                     SelectedRb.AddForce((TargetPos - SelectedRb.transform.position) * PullForce * Time.deltaTime);
                 }
             }
-        }
-        if (Input.GetButtonUp("Select"))
-        {
-            SelectedRb = null;
         }
     }
 }
